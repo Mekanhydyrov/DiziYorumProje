@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DbFilimDiziModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TblAdmin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kullanici" Type="varchar" MaxLength="20" />
+          <Property Name="Sifre" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TblBlok">
+          <Key>
+            <PropertyRef Name="Blokid" />
+          </Key>
+          <Property Name="Blokid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BlokBaslik" Type="nvarchar" MaxLength="100" />
+          <Property Name="Blokicerik" Type="nvarchar(max)" />
+          <Property Name="BlokTarih" Type="smalldatetime" />
+          <Property Name="BlokGorsel" Type="varchar" MaxLength="250" />
+          <Property Name="BlokTur" Type="tinyint" />
+          <Property Name="BlokKategori" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="TblHakkimizda">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Hakkimda" Type="varchar(max)" />
+          <Property Name="iletisimAciklama" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Tbliletisim">
+          <Key>
+            <PropertyRef Name="Mesajid" />
+          </Key>
+          <Property Name="Mesajid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdSoyad" Type="varchar" MaxLength="50" />
+          <Property Name="Mail" Type="varchar" MaxLength="50" />
+          <Property Name="Telefon" Type="varchar" MaxLength="50" />
+          <Property Name="Konu" Type="varchar" MaxLength="50" />
+          <Property Name="Mesaj" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="TblKategori">
+          <Key>
+            <PropertyRef Name="Kategoriid" />
+          </Key>
+          <Property Name="Kategoriid" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KategoriAd" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TblTur">
+          <Key>
+            <PropertyRef Name="Turid" />
+          </Key>
+          <Property Name="Turid" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TurAd" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TblYorum">
+          <Key>
+            <PropertyRef Name="Yorumid" />
+          </Key>
+          <Property Name="Yorumid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciAd" Type="varchar" MaxLength="20" />
+          <Property Name="Mail" Type="varchar" MaxLength="50" />
+          <Property Name="Yorumicerik" Type="varchar" MaxLength="400" />
+          <Property Name="YorumBlok" Type="int" />
+        </EntityType>
+        <Association Name="FK_Tbl_Blok_Tbl_Kategori">
+          <End Role="TblKategori" Type="Self.TblKategori" Multiplicity="0..1" />
+          <End Role="TblBlok" Type="Self.TblBlok" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblKategori">
+              <PropertyRef Name="Kategoriid" />
+            </Principal>
+            <Dependent Role="TblBlok">
+              <PropertyRef Name="BlokKategori" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Blok_Tbl_Tur">
+          <End Role="TblTur" Type="Self.TblTur" Multiplicity="0..1" />
+          <End Role="TblBlok" Type="Self.TblBlok" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblTur">
+              <PropertyRef Name="Turid" />
+            </Principal>
+            <Dependent Role="TblBlok">
+              <PropertyRef Name="BlokTur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Yorum_Tbl_Blok">
+          <End Role="TblBlok" Type="Self.TblBlok" Multiplicity="0..1" />
+          <End Role="TblYorum" Type="Self.TblYorum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblBlok">
+              <PropertyRef Name="Blokid" />
+            </Principal>
+            <Dependent Role="TblYorum">
+              <PropertyRef Name="YorumBlok" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbFilimDiziModelStoreContainer">
+          <EntitySet Name="TblAdmin" EntityType="Self.TblAdmin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblBlok" EntityType="Self.TblBlok" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblHakkimizda" EntityType="Self.TblHakkimizda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbliletisim" EntityType="Self.Tbliletisim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblKategori" EntityType="Self.TblKategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblTur" EntityType="Self.TblTur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblYorum" EntityType="Self.TblYorum" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Tbl_Blok_Tbl_Kategori" Association="Self.FK_Tbl_Blok_Tbl_Kategori">
+            <End Role="TblKategori" EntitySet="TblKategori" />
+            <End Role="TblBlok" EntitySet="TblBlok" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Blok_Tbl_Tur" Association="Self.FK_Tbl_Blok_Tbl_Tur">
+            <End Role="TblTur" EntitySet="TblTur" />
+            <End Role="TblBlok" EntitySet="TblBlok" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Yorum_Tbl_Blok" Association="Self.FK_Tbl_Yorum_Tbl_Blok">
+            <End Role="TblBlok" EntitySet="TblBlok" />
+            <End Role="TblYorum" EntitySet="TblYorum" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbFilimDiziModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TblAdmin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kullanici" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Sifre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TblBlok">
+          <Key>
+            <PropertyRef Name="Blokid" />
+          </Key>
+          <Property Name="Blokid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BlokBaslik" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Blokicerik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BlokTarih" Type="DateTime" Precision="0" />
+          <Property Name="BlokGorsel" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="BlokTur" Type="Byte" />
+          <Property Name="BlokKategori" Type="Byte" />
+          <NavigationProperty Name="TblKategori" Relationship="Self.FK_Tbl_Blok_Tbl_Kategori" FromRole="TblBlok" ToRole="TblKategori" />
+          <NavigationProperty Name="TblTur" Relationship="Self.FK_Tbl_Blok_Tbl_Tur" FromRole="TblBlok" ToRole="TblTur" />
+          <NavigationProperty Name="TblYorum" Relationship="Self.FK_Tbl_Yorum_Tbl_Blok" FromRole="TblBlok" ToRole="TblYorum" />
+        </EntityType>
+        <EntityType Name="TblHakkimizda">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Hakkimda" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="iletisimAciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Tbliletisim">
+          <Key>
+            <PropertyRef Name="Mesajid" />
+          </Key>
+          <Property Name="Mesajid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Konu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mesaj" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TblKategori">
+          <Key>
+            <PropertyRef Name="Kategoriid" />
+          </Key>
+          <Property Name="Kategoriid" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KategoriAd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TblBlok" Relationship="Self.FK_Tbl_Blok_Tbl_Kategori" FromRole="TblKategori" ToRole="TblBlok" />
+        </EntityType>
+        <EntityType Name="TblTur">
+          <Key>
+            <PropertyRef Name="Turid" />
+          </Key>
+          <Property Name="Turid" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TurAd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TblBlok" Relationship="Self.FK_Tbl_Blok_Tbl_Tur" FromRole="TblTur" ToRole="TblBlok" />
+        </EntityType>
+        <EntityType Name="TblYorum">
+          <Key>
+            <PropertyRef Name="Yorumid" />
+          </Key>
+          <Property Name="Yorumid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciAd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Yorumicerik" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="YorumBlok" Type="Int32" />
+          <NavigationProperty Name="TblBlok" Relationship="Self.FK_Tbl_Yorum_Tbl_Blok" FromRole="TblYorum" ToRole="TblBlok" />
+        </EntityType>
+        <Association Name="FK_Tbl_Blok_Tbl_Kategori">
+          <End Role="TblKategori" Type="Self.TblKategori" Multiplicity="0..1" />
+          <End Role="TblBlok" Type="Self.TblBlok" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblKategori">
+              <PropertyRef Name="Kategoriid" />
+            </Principal>
+            <Dependent Role="TblBlok">
+              <PropertyRef Name="BlokKategori" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Blok_Tbl_Tur">
+          <End Role="TblTur" Type="Self.TblTur" Multiplicity="0..1" />
+          <End Role="TblBlok" Type="Self.TblBlok" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblTur">
+              <PropertyRef Name="Turid" />
+            </Principal>
+            <Dependent Role="TblBlok">
+              <PropertyRef Name="BlokTur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Yorum_Tbl_Blok">
+          <End Role="TblBlok" Type="Self.TblBlok" Multiplicity="0..1" />
+          <End Role="TblYorum" Type="Self.TblYorum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblBlok">
+              <PropertyRef Name="Blokid" />
+            </Principal>
+            <Dependent Role="TblYorum">
+              <PropertyRef Name="YorumBlok" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbFilimDiziEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TblAdmin" EntityType="Self.TblAdmin" />
+          <EntitySet Name="TblBlok" EntityType="Self.TblBlok" />
+          <EntitySet Name="TblHakkimizda" EntityType="Self.TblHakkimizda" />
+          <EntitySet Name="Tbliletisim" EntityType="Self.Tbliletisim" />
+          <EntitySet Name="TblKategori" EntityType="Self.TblKategori" />
+          <EntitySet Name="TblTur" EntityType="Self.TblTur" />
+          <EntitySet Name="TblYorum" EntityType="Self.TblYorum" />
+          <AssociationSet Name="FK_Tbl_Blok_Tbl_Kategori" Association="Self.FK_Tbl_Blok_Tbl_Kategori">
+            <End Role="TblKategori" EntitySet="TblKategori" />
+            <End Role="TblBlok" EntitySet="TblBlok" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Blok_Tbl_Tur" Association="Self.FK_Tbl_Blok_Tbl_Tur">
+            <End Role="TblTur" EntitySet="TblTur" />
+            <End Role="TblBlok" EntitySet="TblBlok" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Yorum_Tbl_Blok" Association="Self.FK_Tbl_Yorum_Tbl_Blok">
+            <End Role="TblBlok" EntitySet="TblBlok" />
+            <End Role="TblYorum" EntitySet="TblYorum" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbFilimDiziModelStoreContainer" CdmEntityContainer="DbFilimDiziEntities1">
+          <EntitySetMapping Name="TblAdmin">
+            <EntityTypeMapping TypeName="DbFilimDiziModel.TblAdmin">
+              <MappingFragment StoreEntitySet="TblAdmin">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Kullanici" ColumnName="Kullanici" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblBlok">
+            <EntityTypeMapping TypeName="DbFilimDiziModel.TblBlok">
+              <MappingFragment StoreEntitySet="TblBlok">
+                <ScalarProperty Name="Blokid" ColumnName="Blokid" />
+                <ScalarProperty Name="BlokBaslik" ColumnName="BlokBaslik" />
+                <ScalarProperty Name="Blokicerik" ColumnName="Blokicerik" />
+                <ScalarProperty Name="BlokTarih" ColumnName="BlokTarih" />
+                <ScalarProperty Name="BlokGorsel" ColumnName="BlokGorsel" />
+                <ScalarProperty Name="BlokTur" ColumnName="BlokTur" />
+                <ScalarProperty Name="BlokKategori" ColumnName="BlokKategori" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblHakkimizda">
+            <EntityTypeMapping TypeName="DbFilimDiziModel.TblHakkimizda">
+              <MappingFragment StoreEntitySet="TblHakkimizda">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Hakkimda" ColumnName="Hakkimda" />
+                <ScalarProperty Name="iletisimAciklama" ColumnName="iletisimAciklama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbliletisim">
+            <EntityTypeMapping TypeName="DbFilimDiziModel.Tbliletisim">
+              <MappingFragment StoreEntitySet="Tbliletisim">
+                <ScalarProperty Name="Mesajid" ColumnName="Mesajid" />
+                <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Konu" ColumnName="Konu" />
+                <ScalarProperty Name="Mesaj" ColumnName="Mesaj" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblKategori">
+            <EntityTypeMapping TypeName="DbFilimDiziModel.TblKategori">
+              <MappingFragment StoreEntitySet="TblKategori">
+                <ScalarProperty Name="Kategoriid" ColumnName="Kategoriid" />
+                <ScalarProperty Name="KategoriAd" ColumnName="KategoriAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblTur">
+            <EntityTypeMapping TypeName="DbFilimDiziModel.TblTur">
+              <MappingFragment StoreEntitySet="TblTur">
+                <ScalarProperty Name="Turid" ColumnName="Turid" />
+                <ScalarProperty Name="TurAd" ColumnName="TurAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblYorum">
+            <EntityTypeMapping TypeName="DbFilimDiziModel.TblYorum">
+              <MappingFragment StoreEntitySet="TblYorum">
+                <ScalarProperty Name="Yorumid" ColumnName="Yorumid" />
+                <ScalarProperty Name="KullaniciAd" ColumnName="KullaniciAd" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Yorumicerik" ColumnName="Yorumicerik" />
+                <ScalarProperty Name="YorumBlok" ColumnName="YorumBlok" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

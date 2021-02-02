@@ -1,0 +1,20 @@
+﻿.infoimg {
+    width: 670px;
+    height: 400px;
+}
+
+@media(max-width:480px) {
+    .infoimg {
+        width: 33%;
+        height:33%;
+    }
+}
+
+.baslik p:first-child {
+     font:bold;
+     font-size:22px;      
+}
+
+
+
+

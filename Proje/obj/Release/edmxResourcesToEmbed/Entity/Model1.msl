@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DbFilimDiziModelStoreContainer" CdmEntityContainer="DbFilimDiziEntities1">
+    <EntitySetMapping Name="TblAdmin">
+      <EntityTypeMapping TypeName="DbFilimDiziModel.TblAdmin">
+        <MappingFragment StoreEntitySet="TblAdmin">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Kullanici" ColumnName="Kullanici" />
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblBlok">
+      <EntityTypeMapping TypeName="DbFilimDiziModel.TblBlok">
+        <MappingFragment StoreEntitySet="TblBlok">
+          <ScalarProperty Name="Blokid" ColumnName="Blokid" />
+          <ScalarProperty Name="BlokBaslik" ColumnName="BlokBaslik" />
+          <ScalarProperty Name="Blokicerik" ColumnName="Blokicerik" />
+          <ScalarProperty Name="BlokTarih" ColumnName="BlokTarih" />
+          <ScalarProperty Name="BlokGorsel" ColumnName="BlokGorsel" />
+          <ScalarProperty Name="BlokTur" ColumnName="BlokTur" />
+          <ScalarProperty Name="BlokKategori" ColumnName="BlokKategori" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblHakkimizda">
+      <EntityTypeMapping TypeName="DbFilimDiziModel.TblHakkimizda">
+        <MappingFragment StoreEntitySet="TblHakkimizda">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Hakkimda" ColumnName="Hakkimda" />
+          <ScalarProperty Name="iletisimAciklama" ColumnName="iletisimAciklama" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbliletisim">
+      <EntityTypeMapping TypeName="DbFilimDiziModel.Tbliletisim">
+        <MappingFragment StoreEntitySet="Tbliletisim">
+          <ScalarProperty Name="Mesajid" ColumnName="Mesajid" />
+          <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Konu" ColumnName="Konu" />
+          <ScalarProperty Name="Mesaj" ColumnName="Mesaj" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblKategori">
+      <EntityTypeMapping TypeName="DbFilimDiziModel.TblKategori">
+        <MappingFragment StoreEntitySet="TblKategori">
+          <ScalarProperty Name="Kategoriid" ColumnName="Kategoriid" />
+          <ScalarProperty Name="KategoriAd" ColumnName="KategoriAd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblTur">
+      <EntityTypeMapping TypeName="DbFilimDiziModel.TblTur">
+        <MappingFragment StoreEntitySet="TblTur">
+          <ScalarProperty Name="Turid" ColumnName="Turid" />
+          <ScalarProperty Name="TurAd" ColumnName="TurAd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblYorum">
+      <EntityTypeMapping TypeName="DbFilimDiziModel.TblYorum">
+        <MappingFragment StoreEntitySet="TblYorum">
+          <ScalarProperty Name="Yorumid" ColumnName="Yorumid" />
+          <ScalarProperty Name="KullaniciAd" ColumnName="KullaniciAd" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+          <ScalarProperty Name="Yorumicerik" ColumnName="Yorumicerik" />
+          <ScalarProperty Name="YorumBlok" ColumnName="YorumBlok" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
